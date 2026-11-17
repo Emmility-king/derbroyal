@@ -56,13 +56,13 @@ export default function AboutPage() {
         </div>
         <div className="company-profile-image">
           <Image
-            src="/derbroyal-home-about.jpg"
-            alt="Black woman with voluminous natural curls"
+            src="/derbroyal-founder.png"
+            alt="Founder of DERBROYAL LIMITED"
             fill
             loading="eager"
             sizes="(max-width: 760px) 90vw, 42vw"
           />
-          <span>BEAUTY • PERSONAL CARE • COMMERCE</span>
+          <span>FOUNDER • DERBROYAL LIMITED</span>
         </div>
       </section>
 

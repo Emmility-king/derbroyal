@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import MotionEffects from "../motion-effects";
 import SiteFooter from "./site-footer";
@@ -7,6 +8,8 @@ type ShowcaseCard = {
   label: string;
   title: string;
   description: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 type ShowcasePageProps = {
@@ -80,6 +83,16 @@ export default function ShowcasePage({
         <div className="route-grid">
           {cards.map((card, index) => (
             <article className="route-card" key={card.title}>
+              {card.image ? (
+                <div className="route-card-image">
+                  <Image
+                    src={card.image}
+                    alt={card.imageAlt ?? card.title}
+                    fill
+                    sizes="(max-width: 760px) 100vw, 33vw"
+                  />
+                </div>
+              ) : null}
               <div className="route-card-top">
                 <span>0{index + 1}</span>
                 <span aria-hidden="true">✳</span>

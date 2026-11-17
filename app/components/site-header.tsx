@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const navigation = [
@@ -16,6 +17,7 @@ const navigation = [
 
 export default function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="site-header">
@@ -57,6 +59,18 @@ export default function SiteHeader() {
           <Link
             href={item.href}
             key={item.href}
+            className={
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href))
+                ? "nav-link--active"
+                : undefined
+            }
+            aria-current={
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href))
+                ? "page"
+                : undefined
+            }
             onClick={() => setIsMenuOpen(false)}
           >
             {item.label}

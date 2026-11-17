@@ -16,6 +16,13 @@ export const metadata: Metadata = {
   title: "DERBROYAL LIMITED | Hair that feels like you",
   description:
     "Big energy, beautiful hair. Find your signature look with DERBROYAL LIMITED.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/derbroyal-logo.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

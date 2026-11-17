@@ -3,7 +3,8 @@ import ShowcasePage from "../components/showcase-page";
 
 export const metadata: Metadata = {
   title: "Shop Services | DERBROYAL LIMITED",
-  description: "Find the right cut, colour, and care at DERBROYAL LIMITED.",
+  description:
+    "Explore hair, manicure, pedicure, and personal-care services at DERBROYAL LIMITED.",
 };
 
 export default function ShopPage() {
@@ -19,22 +20,28 @@ export default function ShopPage() {
       actionHref="/contact"
       cards={[
         {
-          label: "CUT & SHAPE",
-          title: "A cut made for you",
+          label: "NAIL CARE",
+          title: "Manicure & pedicure",
           description:
-            "A considered consultation and a shape that works with your texture and routine.",
+            "Polished hands and feet, detailed nail care, and treatments that leave you feeling refreshed.",
+          image: "/derbroyal-manicure-pedicure.png",
+          imageAlt: "Pink manicure and pedicure treatment",
         },
         {
-          label: "COLOUR",
-          title: "Colour with dimension",
+          label: "BEAUTY LOOK",
+          title: "A polished beauty moment",
           description:
-            "Personalised colour ideas, from subtle brightness to a whole new mood.",
+            "Effortless beauty, warm confidence, and a look made to feel completely your own.",
+          image: "/derbroyal-beauty-portrait-1.jpeg",
+          imageAlt: "Black woman wearing a polished beauty look",
         },
         {
-          label: "CARE & STYLE",
-          title: "The finishing touch",
+          label: "PERSONAL CARE",
+          title: "Care with confidence",
           description:
-            "Nourishing care and styling for everyday confidence or a special moment.",
+            "A feel-good finish with personal attention, from everyday care to a special occasion.",
+          image: "/derbroyal-beauty-portrait-2.jpeg",
+          imageAlt: "Smiling Black woman in a beauty portrait",
         },
       ]}
     />
