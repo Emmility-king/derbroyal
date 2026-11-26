@@ -318,7 +318,7 @@ export default function Home() {
         <div
           className="about-photo"
           role="img"
-          aria-label="Client with voluminous natural curls"
+          aria-label="Derbroyal beauty portrait"
         >
           <span className="about-photo-note">THE FEEL-GOOD FINISH</span>
         </div>

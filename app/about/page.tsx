@@ -47,8 +47,8 @@ export default function AboutPage() {
           </h1>
           <p>
             DERBROYAL LIMITED is a diversified business enterprise established
-            to provide quality products and services across the beauty,
-            personal care, trading and commercial sectors.
+            to provide quality products and services across the beauty, personal
+            care, trading and commercial sectors.
           </p>
           <Link className="button button-primary" href="#business-areas">
             Explore what we do <span aria-hidden="true">↓</span>
@@ -97,7 +97,7 @@ export default function AboutPage() {
       <section className="company-mission">
         <div className="company-mission-image">
           <Image
-            src="/derbroyal-lookbook-volume.jpg"
+            src="/WhatsApp Image 2026-11-26 at 10.30.06 (2).jpeg"
             alt="Black woman with a natural curly hairstyle"
             fill
             sizes="(max-width: 760px) 100vw, 42vw"
@@ -112,8 +112,8 @@ export default function AboutPage() {
           </h2>
           <p>
             Our mission is to deliver quality, professionalism and customer
-            satisfaction while building a reputable brand with opportunities
-            for growth and expansion across multiple industries.
+            satisfaction while building a reputable brand with opportunities for
+            growth and expansion across multiple industries.
           </p>
           <Link className="button button-light" href="/contact">
             Get in touch <span aria-hidden="true">↗</span>
