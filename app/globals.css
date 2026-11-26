@@ -1866,6 +1866,26 @@ a {
   margin: 24px 0 25px;
 }
 
+.company-profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: -10px 0 22px;
+}
+
+.company-profile-links a {
+  color: var(--deep-magenta);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.company-profile-links a:hover {
+  color: var(--magenta);
+}
+
 .company-profile-image {
   position: relative;
   width: 100%;

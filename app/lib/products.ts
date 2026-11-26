@@ -207,7 +207,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       "Promotes edge retention and hair density",
       "Subtle invigorating jasmine and mint aroma"
     ],
-    image: "/derbroyal-home-about.jpg",
+    image: "/WhatsApp Image 2026-11-26 at 10.30.54.jpeg",
     imageAlt: "Luxury hair care bottle and botanical formulation",
     rating: 4.9,
     reviewsCount: 88,
