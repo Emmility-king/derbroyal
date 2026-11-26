@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { StoreProvider } from "./context/store-context";
+import CartDrawer from "./components/cart-drawer";
+import QuickViewModal from "./components/quick-view-modal";
+import ToastNotification from "./components/toast-notification";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DERBROYAL LIMITED | Hair that feels like you",
+  title: "DERBROYAL LIMITED | Hair & Beauty in Benin City, Nigeria",
   description:
-    "Big energy, beautiful hair. Find your signature look with DERBROYAL LIMITED.",
+    "Shop luxury hair and book manicure, pedicure, and hair installation services in Benin City, Edo State, Nigeria.",
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon" },
@@ -25,13 +29,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <StoreProvider>
+          {children}
+          <CartDrawer />
+          <QuickViewModal />
+          <ToastNotification />
+        </StoreProvider>
+      </body>
     </html>
   );
 }

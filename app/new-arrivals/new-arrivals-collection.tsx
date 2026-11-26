@@ -6,116 +6,46 @@ import { useMemo, useState } from "react";
 import MotionEffects from "../motion-effects";
 import SiteFooter from "../components/site-footer";
 import SiteHeader from "../components/site-header";
-
-type StyleFilter = "all" | "waves" | "bobs" | "straight";
-type ShadeFilter = "all" | "natural" | "colour";
-type SortOrder = "featured" | "name-asc" | "name-desc";
-
-type Arrival = {
-  name: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  style: Exclude<StyleFilter, "all">;
-  shade: Exclude<ShadeFilter, "all">;
-  tag: string;
-};
-
-const arrivals: Arrival[] = [
-  {
-    name: "Rosewood Volume",
-    description: "Soft, sweeping layers with a full-bodied finish.",
-    image: "/WhatsApp Image 2026-11-16 at 20.02.42.jpeg",
-    imageAlt: "Long rose-brown waves displayed on a wig mannequin",
-    style: "waves",
-    shade: "colour",
-    tag: "Soft waves",
-  },
-  {
-    name: "Midnight Muse",
-    description: "Glossy black curls with all-day main-character energy.",
-    image: "/WhatsApp Image 2026-11-16 at 20.02.42 (1).jpeg",
-    imageAlt: "Two voluminous black curly wigs displayed on mannequins",
-    style: "waves",
-    shade: "natural",
-    tag: "Full curls",
-  },
-  {
-    name: "Merlot Bob",
-    description: "A sleek, rich-toned bob that makes its own entrance.",
-    image: "/WhatsApp Image 2026-11-16 at 20.02.42 (2).jpeg",
-    imageAlt: "A deep burgundy bob wig displayed on a mannequin",
-    style: "bobs",
-    shade: "colour",
-    tag: "Statement bob",
-  },
-  {
-    name: "Golden Hour Curls",
-    description: "Big, bouncy curls in a golden blonde statement shade.",
-    image: "/WhatsApp Image 2026-11-16 at 20.02.42 (3).jpeg",
-    imageAlt: "Voluminous golden blonde curls displayed on a wig mannequin",
-    style: "waves",
-    shade: "colour",
-    tag: "Big curls",
-  },
-  {
-    name: "Copper Fringe",
-    description: "A smooth copper finish with a face-framing fringe.",
-    image: "/WhatsApp Image 2026-11-16 at 20.02.43.jpeg",
-    imageAlt: "A long copper wig with a full fringe displayed on a mannequin",
-    style: "straight",
-    shade: "colour",
-    tag: "Fringe",
-  },
-];
-
-const styleOptions: { value: StyleFilter; label: string }[] = [
-  { value: "all", label: "All styles" },
-  { value: "waves", label: "Waves & curls" },
-  { value: "bobs", label: "Bobs" },
-  { value: "straight", label: "Straight & fringe" },
-];
-
-const shadeOptions: { value: ShadeFilter; label: string }[] = [
-  { value: "all", label: "All shades" },
-  { value: "natural", label: "Natural tones" },
-  { value: "colour", label: "Statement colour" },
-];
-
-function isStyleFilter(value: string): value is StyleFilter {
-  return value === "all" || value === "waves" || value === "bobs" || value === "straight";
-}
-
-function isShadeFilter(value: string): value is ShadeFilter {
-  return value === "all" || value === "natural" || value === "colour";
-}
-
-function isSortOrder(value: string): value is SortOrder {
-  return value === "featured" || value === "name-asc" || value === "name-desc";
-}
+import { useStore } from "../context/store-context";
+import { formatNaira } from "../lib/currency";
+import { StarIcon } from "../components/icons";
 
 export default function NewArrivalsCollection() {
-  const [styleFilter, setStyleFilter] = useState<StyleFilter>("all");
-  const [shadeFilter, setShadeFilter] = useState<ShadeFilter>("all");
-  const [sortOrder, setSortOrder] = useState<SortOrder>("featured");
+  const { products, addToCart, setQuickViewProduct } = useStore();
 
+  const [styleFilter, setStyleFilter] = useState<string>("all");
+  const [shadeFilter, setShadeFilter] = useState<string>("all");
+  const [sortOrder, setSortOrder] = useState<string>("featured");
+
+  // Filter products: show wigs & products marked as new arrivals or created recently
   const visibleArrivals = useMemo(() => {
-    const filtered = arrivals.filter((arrival) => {
-      const matchesStyle = styleFilter === "all" || arrival.style === styleFilter;
-      const matchesShade = shadeFilter === "all" || arrival.shade === shadeFilter;
-      return matchesStyle && matchesShade;
+    const list = products.filter((p) => {
+      const isArrival =
+        p.tag.toLowerCase().includes("new") ||
+        p.tag.toLowerCase().includes("trending") ||
+        p.tag.toLowerCase().includes("high") ||
+        p.tag.toLowerCase().includes("editor");
+
+      const matchesStyle = styleFilter === "all" || p.style === styleFilter;
+      const matchesShade = shadeFilter === "all" || p.shade === shadeFilter;
+      return (isArrival || products.length <= 10) && matchesStyle && matchesShade;
     });
 
     if (sortOrder === "name-asc") {
-      return filtered.sort((first, second) => first.name.localeCompare(second.name));
+      return [...list].sort((a, b) => a.name.localeCompare(b.name));
     }
-
     if (sortOrder === "name-desc") {
-      return filtered.sort((first, second) => second.name.localeCompare(first.name));
+      return [...list].sort((a, b) => b.name.localeCompare(a.name));
+    }
+    if (sortOrder === "price-asc") {
+      return [...list].sort((a, b) => a.price - b.price);
+    }
+    if (sortOrder === "price-desc") {
+      return [...list].sort((a, b) => b.price - a.price);
     }
 
-    return filtered;
-  }, [shadeFilter, sortOrder, styleFilter]);
+    return list;
+  }, [products, styleFilter, shadeFilter, sortOrder]);
 
   const hasActiveFilter = styleFilter !== "all" || shadeFilter !== "all";
 
@@ -136,15 +66,21 @@ export default function NewArrivalsCollection() {
           </p>
           <h1>
             New arrivals
+            <br />
             <em>for your crown.</em>
           </h1>
           <p className="collection-intro">
-            A fresh edit of statement wigs and salon-ready looks for Black
+            A fresh edit of statement wigs, custom colours, and salon-ready looks for Black
             women. Find your texture, choose your mood, and make the look yours.
           </p>
-          <a className="collection-scroll" href="#new-styles">
-            Explore the latest <span aria-hidden="true">↓</span>
-          </a>
+          <div className="collection-hero-actions">
+            <a className="button button-primary" href="#new-styles">
+              Explore the latest <span aria-hidden="true">↓</span>
+            </a>
+            <Link className="button button-light" href="/shop">
+              Browse all collections <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -156,17 +92,12 @@ export default function NewArrivalsCollection() {
               <select
                 aria-label="Filter by style"
                 value={styleFilter}
-                onChange={(event) => {
-                  if (isStyleFilter(event.currentTarget.value)) {
-                    setStyleFilter(event.currentTarget.value);
-                  }
-                }}
+                onChange={(e) => setStyleFilter(e.target.value)}
               >
-                {styleOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                <option value="all">All styles</option>
+                <option value="waves">Waves & curls</option>
+                <option value="bobs">Bobs</option>
+                <option value="straight">Straight & fringe</option>
               </select>
             </label>
 
@@ -175,17 +106,14 @@ export default function NewArrivalsCollection() {
               <select
                 aria-label="Filter by shade"
                 value={shadeFilter}
-                onChange={(event) => {
-                  if (isShadeFilter(event.currentTarget.value)) {
-                    setShadeFilter(event.currentTarget.value);
-                  }
-                }}
+                onChange={(e) => setShadeFilter(e.target.value)}
               >
-                {shadeOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                <option value="all">All shades</option>
+                <option value="natural">Natural tones</option>
+                <option value="colour">Statement colour</option>
+                <option value="blonde">Blonde tones</option>
+                <option value="burgundy">Burgundy wine</option>
+                <option value="copper">Warm copper</option>
               </select>
             </label>
 
@@ -210,13 +138,11 @@ export default function NewArrivalsCollection() {
               <select
                 aria-label="Sort arrivals"
                 value={sortOrder}
-                onChange={(event) => {
-                  if (isSortOrder(event.currentTarget.value)) {
-                    setSortOrder(event.currentTarget.value);
-                  }
-                }}
+                onChange={(e) => setSortOrder(e.target.value)}
               >
                 <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
                 <option value="name-asc">Name, A to Z</option>
                 <option value="name-desc">Name, Z to A</option>
               </select>
@@ -227,35 +153,67 @@ export default function NewArrivalsCollection() {
         {visibleArrivals.length > 0 ? (
           <div className="collection-grid">
             {visibleArrivals.map((arrival) => (
-              <article className="collection-product-card" key={arrival.name}>
+              <article className="collection-product-card" key={arrival.id}>
                 <div className="collection-product-image">
                   <Image
-                    src={encodeURI(arrival.image)}
-                    alt={arrival.imageAlt}
+                    src={arrival.image}
+                    alt={arrival.imageAlt || arrival.name}
                     fill
-                    sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 25vw"
+                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
                   />
-                  <span className="collection-product-badge">NEW ARRIVAL</span>
-                  <Link
+                  <span className="collection-product-badge">
+                    {arrival.tag || "NEW ARRIVAL"}
+                  </span>
+                  <button
+                    type="button"
                     className="collection-product-action"
-                    href={`/contact?style=${encodeURIComponent(arrival.name)}`}
-                    aria-label={`Ask about ${arrival.name}`}
+                    onClick={() => setQuickViewProduct(arrival)}
                   >
-                    Ask about this look <span aria-hidden="true">↗</span>
-                  </Link>
+                    Quick View <span aria-hidden="true">↗</span>
+                  </button>
                 </div>
+
                 <div className="collection-product-info">
-                  <p>{arrival.tag}</p>
+                  <div className="arrival-meta-top">
+                    <p className="arrival-tag">{arrival.tag}</p>
+                    <span className="arrival-rating inline-flex items-center gap-1">
+                      <StarIcon size={12} fill="#f59e0b" className="text-amber-500 inline" />
+                      <span>{arrival.rating.toFixed(1)}</span>
+                    </span>
+                  </div>
+
                   <h2>{arrival.name}</h2>
-                  <span>{arrival.description}</span>
+                  <span className="arrival-desc">{arrival.description}</span>
+
+                  <div className="arrival-footer-row">
+                    <div className="arrival-price-wrap">
+                      <span className="arrival-price">{formatNaira(arrival.price)}</span>
+                      {arrival.compareAtPrice && (
+                        <span className="arrival-compare-price">
+                          {formatNaira(arrival.compareAtPrice)}
+                        </span>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="button button-primary arrival-add-btn"
+                      onClick={() => addToCart(arrival)}
+                    >
+                      Add to Bag ↗
+                    </button>
+                  </div>
                 </div>
               </article>
             ))}
           </div>
         ) : (
-          <p className="collection-empty" role="status">
-            No styles match those filters. Try another combination.
-          </p>
+          <div className="collection-empty" role="status">
+            <p>No styles match those filters. Try another combination.</p>
+            <button type="button" className="button button-primary mt-3" onClick={clearFilters}>
+              Reset Filters
+            </button>
+          </div>
         )}
       </section>
 
@@ -263,11 +221,17 @@ export default function NewArrivalsCollection() {
         <p className="collection-eyebrow">YOUR TEXTURE. YOUR ENERGY.</p>
         <h2>
           The next look
+          <br />
           <em>is all yours.</em>
         </h2>
-        <Link className="button button-primary" href="/contact">
-          Let&apos;s find your look <span aria-hidden="true">↗</span>
-        </Link>
+        <div className="flex gap-4 justify-center">
+          <Link className="button button-primary" href="/shop">
+            Shop Full Catalog <span aria-hidden="true">↗</span>
+          </Link>
+          <Link className="button button-light" href="/contact">
+            Book Fitting Consultation <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </section>
 
       <SiteFooter />
