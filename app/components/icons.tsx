@@ -231,6 +231,46 @@ export function CheckIcon({ className = "", size = 16, strokeWidth = 2 }: IconPr
   );
 }
 
+export function WhatsAppIcon({ className = "", size = 16, strokeWidth = 1.8 }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.45L3 20.5l1.38-4.73A8.5 8.5 0 1 1 20.5 11.7Z" />
+      <path d="M8.2 7.8c.2-.45.42-.46.62-.47h.52c.18 0 .34.06.43.27l.73 1.75c.08.19.04.35-.08.48l-.68.82c-.13.15-.1.28-.02.44.48.96 1.14 1.72 2.04 2.27.31.19.55.23.74.08l.87-.72c.17-.14.35-.17.54-.08l1.72.82c.21.1.34.15.38.29.04.14.04.8-.31 1.38-.34.56-1.06 1.05-1.62 1.12-.53.07-1.23.02-2.08-.32a11.11 11.11 0 0 1-3.1-1.94 10.23 10.23 0 0 1-2.12-2.83c-.45-.84-.48-1.57-.37-2.14.1-.5.42-.85.79-1.22Z" />
+    </svg>
+  );
+}
+
+export function TikTokIcon({ className = "", size = 16, strokeWidth = 1.8 }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M9.5 8v8.2a3.8 3.8 0 1 1-3.8-3.8" />
+      <path d="M9.5 8c1.8 2.1 3.7 3.2 6.2 3.2V7.4c-.8 0-1.5-.2-2.1-.6V14" />
+    </svg>
+  );
+}
+
 export function CheckCircleIcon({ className = "", size = 20, strokeWidth = 1.8 }: IconProps) {
   return (
     <svg

@@ -3,7 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { SparkleIcon, CheckIcon, MapPinIcon } from "./icons";
+import {
+  SparkleIcon,
+  CheckIcon,
+  MapPinIcon,
+  WhatsAppIcon,
+  TikTokIcon,
+} from "./icons";
 
 export default function SiteFooter() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -80,10 +86,38 @@ export default function SiteFooter() {
 
           <div className="footer-studio-location">
             <MapPinIcon size={18} className="text-amber-400 shrink-0 mt-0.5" />
-            <div>
+            <div className="footer-contact-details">
               <strong>Benin City, Edo State, Nigeria</strong>
               <p>Appointments: Mon – Sat, 10:00 – 19:00</p>
-              <a href="mailto:Debbyroyalhairs@gmail.com">Debbyroyalhairs@gmail.com</a>
+              <a
+                href="mailto:Debbyroyalhairs@gmail.com"
+                className="footer-contact-link"
+              >
+                <span className="footer-contact-icon" aria-hidden="true">@</span>
+                <span>Debbyroyalhairs@gmail.com</span>
+              </a>
+              <a
+                href="https://www.tiktok.com/@debbyroyal_hairs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-contact-link"
+              >
+                <span className="footer-contact-icon">
+                  <TikTokIcon size={15} />
+                </span>
+                <span>@debbyroyal_hairs</span>
+              </a>
+              <a
+                href="https://wa.me/2348071333765"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-contact-link"
+              >
+                <span className="footer-contact-icon footer-whatsapp-icon">
+                  <WhatsAppIcon size={15} />
+                </span>
+                <span>08071333765</span>
+              </a>
             </div>
           </div>
         </div>

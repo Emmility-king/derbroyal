@@ -50,22 +50,6 @@ export default function AboutPage() {
             to provide quality products and services across the beauty, personal
             care, trading and commercial sectors.
           </p>
-          <div className="company-profile-links">
-            <a
-              href="https://www.tiktok.com/@debbyroyal_hairs"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              debbyroyal_hairs <span aria-hidden="true">↗</span>
-            </a>
-            <a
-              href="https://wa.me/2348071333765"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              08071333765 <span aria-hidden="true">↗</span>
-            </a>
-          </div>
           <Link className="button button-primary" href="#business-areas">
             Explore what we do <span aria-hidden="true">↓</span>
           </Link>
