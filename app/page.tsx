@@ -81,9 +81,17 @@ export default function Home() {
         <div
           className="hero-visual"
           role="img"
-          aria-label="Portrait of a Black woman with voluminous natural curls"
+          aria-label="DERBROYAL founder wearing long, sleek hair"
         >
-          <div className="hero-photo" />
+          <Image
+            src="/derbroyal-founder.png"
+            alt=""
+            fill
+            preload
+            sizes="100vw"
+            className="hero-photo-image"
+          />
+          <div className="hero-photo" aria-hidden="true" />
         </div>
         <div className="hero-copy">
           <p className="eyebrow">
@@ -310,7 +318,7 @@ export default function Home() {
         <div
           className="about-photo"
           role="img"
-          aria-label="Smiling Black woman showing her natural curly hairstyle"
+          aria-label="Client with voluminous natural curls"
         >
           <span className="about-photo-note">THE FEEL-GOOD FINISH</span>
         </div>
@@ -382,49 +390,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Lookbook */}
+      {/* Gallery preview */}
       <section className="lookbook section-wrap" id="lookbook">
         <div className="lookbook-heading">
           <div>
             <p className="eyebrow">
               <span className="eyebrow-line" />
-              THE LOOKBOOK
+              THE GALLERY
             </p>
             <h2>
-              A mood for
+              Made to
               <br />
-              <em>every you.</em>
+              <em>be seen.</em>
             </h2>
           </div>
-          <p className="section-intro">
-            Save a little inspiration. Bring a whole lot of you.
-          </p>
-        </div>
-        <div className="lookbook-grid">
-          <article className="look-card look-card-one">
-            <div
-              className="look-image look-image-one"
-              role="img"
-              aria-label="Black woman with soft, glossy natural curls"
-            />
-            <span className="look-label">SOFT & GLOSSY</span>
-          </article>
-          <article className="look-card look-card-two">
-            <div
-              className="look-image look-image-two"
-              role="img"
-              aria-label="Black woman with bold, voluminous curls"
-            />
-            <span className="look-label">BOLD & BEAUTIFUL</span>
-          </article>
-          <article className="look-card look-card-three">
-            <div
-              className="look-image look-image-three"
-              role="img"
-              aria-label="Black woman wearing an effortless natural hairstyle"
-            />
-            <span className="look-label">EFFORTLESSLY YOU</span>
-          </article>
+          <div className="gallery-invitation">
+            <p className="section-intro">
+              Explore the styles, services, and studio moments behind the DERBROYAL look.
+            </p>
+            <Link href="/gallery" className="button button-primary">
+              Browse the gallery <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -357,7 +357,7 @@ a {
   inset: 0;
   overflow: hidden;
   border-radius: 0;
-  background-color: #241d10;
+  background-color: transparent;
   background-image:
     linear-gradient(
       180deg,
@@ -370,11 +370,14 @@ a {
       rgba(16, 13, 8, 0.42) 0%,
       rgba(16, 13, 8, 0.04) 48%,
       rgba(16, 13, 8, 0.38) 100%
-    ),
-    url("/derbroyal-home-hero.jpg");
-  background-position: center 39%;
+    );
   background-size: cover;
   box-shadow: none;
+}
+
+.hero-photo-image {
+  object-fit: cover;
+  object-position: center 39%;
 }
 
 .hero-photo::after,
@@ -642,8 +645,8 @@ a {
 
 .lookbook-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.85fr 1.1fr;
-  align-items: end;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
   gap: 17px;
 }
 
@@ -651,33 +654,16 @@ a {
   position: relative;
 }
 
-.look-card-two {
-  padding-bottom: 35px;
-}
-
 .look-image {
   position: relative;
-  min-height: 300px;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 15px;
   background-color: #d9c0df;
-  background-position: center;
-  background-size: cover;
 }
 
-.look-image-one {
-  background-image: url("/derbroyal-lookbook-curls.jpg");
-}
-
-.look-image-two {
-  min-height: 335px;
-  background-image: url("/derbroyal-lookbook-volume.jpg");
-  background-position: center 30%;
-}
-
-.look-image-three {
-  background-image: url("/derbroyal-lookbook-natural.jpg");
-  background-position: center 35%;
+.gallery-photo {
+  object-fit: cover;
 }
 
 .look-image::after {
@@ -697,8 +683,33 @@ a {
   letter-spacing: 0.12em;
 }
 
-.look-card-two .look-label {
-  bottom: 52px;
+.gallery-invitation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.gallery-page {
+  padding-top: 82px;
+  padding-bottom: 110px;
+}
+
+.gallery-page-heading {
+  margin-bottom: 42px;
+}
+
+.gallery-page-heading h1 {
+  margin: 0;
+  font-size: clamp(46px, 6vw, 74px);
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  line-height: 0.97;
+}
+
+.gallery-page-heading h1 em {
+  color: var(--magenta);
+  font-weight: 400;
 }
 
 .contact {
@@ -1334,28 +1345,8 @@ a {
     gap: 12px;
   }
 
-  .look-card-two {
-    padding-top: 28px;
-    padding-bottom: 0;
-  }
-
-  .look-card-three {
-    grid-column: 1 / -1;
-    width: 72%;
-    justify-self: center;
-  }
-
-  .look-image,
-  .look-image-two {
+  .look-image {
     min-height: 225px;
-  }
-
-  .look-card-two .look-label {
-    bottom: 17px;
-  }
-
-  .look-card-three .look-image {
-    min-height: 250px;
   }
 
   .look-label {

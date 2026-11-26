@@ -12,6 +12,7 @@ const navigation = [
   { label: "New Arrivals", href: "/new-arrivals" },
   { label: "Best Sellers", href: "/best-sellers" },
   { label: "Shop", href: "/shop" },
+  { label: "Gallery", href: "/gallery" },
   { label: "About", href: "/about" },
   { label: "Blogs", href: "/blogs" },
   { label: "Contact", href: "/contact" },

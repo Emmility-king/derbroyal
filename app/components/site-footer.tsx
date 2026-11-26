@@ -116,6 +116,9 @@ export default function SiteFooter() {
               <Link href="/about">About DERBROYAL</Link>
             </li>
             <li>
+              <Link href="/gallery">Gallery</Link>
+            </li>
+            <li>
               <Link href="/blogs">Hair & Lace Care Notes</Link>
             </li>
             <li>
